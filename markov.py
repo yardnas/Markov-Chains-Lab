@@ -42,11 +42,26 @@ def make_chains(text_string):
         >>> chains[('there','juanita')]
         [None]
     """
-
     chains = {}
 
-    # your code goes here
+    #use string.split() to separate by white space
+    words = text_string.split()
+    #loop over each piece(word) comparing pairs of words next to each other
 
+    #loop by index to create tuples and list values
+    for idx in range(len(words) - 2):
+        #create key as tuple
+        key = (words[idx], words[idx + 1]) #CHECK AGAIN - doesn't include last I am
+        #create value as list
+        value = words[idx + 2]
+    
+        # handle condition where key is not in chains
+        if key not in chains:
+            chains[key] = []
+
+        #append key/value to dictionary chains
+        chains[key].append(value)
+    
     return chains
 
 
