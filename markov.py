@@ -47,7 +47,7 @@ def make_chains(text_string):
     #use string.split() to separate by white space
     words = text_string.split()
     #loop over each piece(word) comparing pairs of words next to each other
-
+    words.append(None)
     #loop by index to create tuples and list values
     for idx in range(len(words) - 2):
         #create key as tuple
@@ -61,20 +61,33 @@ def make_chains(text_string):
 
         #append key/value to dictionary chains
         chains[key].append(value)
-    
+
     return chains
 
 
 def make_text(chains):
     """Return text from chains."""
-
     words = []
+      
+    # get random key from chains
+    key = choice(list(chains.keys())) # ('eggs', 'and')
 
-    # your code goes here
+    # get random value from chains that relates to random key
+    value = choice(chains[key]) # ham?
+    
+    # add the new word_value into the words list
+    words.append(key[0]) 
+    words.append(key[1])
+
+    while value:
+        key = (key[1], value) #('and', 'ham?')
+        
+        words.append(value) #[[('eggs', 'and'), 'ham?'], 'ham?']
+
+        value = choice(chains.get(key,[])) # Would
 
     return ' '.join(words)
-
-
+    
 input_path = 'green-eggs.txt'
 
 # Open the file and turn it into one long string
